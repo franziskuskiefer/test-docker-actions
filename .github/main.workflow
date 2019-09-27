@@ -1,8 +1,13 @@
-workflow "New workflow" {
-  on = "push"
-  resolves = ["Hello World"]
-}
+name: DockerBuild
 
-action "Hello World" {
-  uses = "./"
-}
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: docker build
