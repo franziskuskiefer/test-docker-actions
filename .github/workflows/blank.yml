@@ -6,6 +6,10 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
+      - name: Do dummy changes
+        run: touch new_file
+      - name: Commit changes
+        run: git add new_file && git commit -a -m "new file"
       - uses: actions/github-script@0.3.0
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
