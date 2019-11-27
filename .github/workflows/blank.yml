@@ -9,10 +9,12 @@ jobs:
       - uses: actions/checkout@v1
       - name: Do dummy changes
         run: touch new_file
-      - name: Commit changes
-        run: git add new_file && git commit -a -m "new file"
-      - uses: actions/github-script@0.3.0
+      - name: Commit files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m "Add changes" -a
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.pulls.create({...context.repo, title: context.payload.commits[0]['message'], head: context.ref, base: 'master' })
+          github_token: ${{ secrets.GITHUB_TOKEN }}
