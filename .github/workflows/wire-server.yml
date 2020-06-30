@@ -1,0 +1,35 @@
+name: "Check Wire Server Configs"
+on:
+  schedule:
+  - cron: "0 0 * * *"
+  push:
+    
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v2
+      - name: Setup
+        run: go get github.com/mozilla/tls-observatory/tlsobs
+      - name: Observatory app.wire.com
+        # TODO: use --min-grade, --min-score, --rescan
+        run: npx observatory-cli app.wire.com --format=report
+      - name: TLS Observatory app.wire.com
+        run: $GOPATH/bin/tlsobs app.wire.com
+      - name: Observatory teams.wire.com
+        # TODO: use --min-grade, --min-score, --rescan
+        run: observatory teams.wire.com --format=report
+      - name: TLS Observatory teams.wire.com
+        run: $GOPATH/bin/tlsobs teams.wire.com
+      - name: Observatory account.wire.com
+        # TODO: use --min-grade, --min-score, --rescan
+        run: observatory account.wire.com --format=report
+      - name: TLS Observatory account.wire.com
+        run: $GOPATH/bin/tlsobs account.wire.com
+      - name: Observatory wire.com
+        # TODO: use --min-grade, --min-score, --rescan
+        run: observatory wire.com --format=report
+      - name: TLS Observatory wire.com
+        run: $GOPATH/bin/tlsobs wire.com
