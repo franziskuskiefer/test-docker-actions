@@ -11,26 +11,24 @@ jobs:
     steps:
       - uses: actions/setup-go@v2
       - name: Setup
-        run: |
-          go get github.com/mozilla/tls-observatory/tlsobs
-          export PATH=$PATH:$(go env GOPATH)/bin
+        run: go get github.com/mozilla/tls-observatory/tlsobs
       - name: Observatory app.wire.com
         # TODO: use --min-grade, --min-score, --rescan
         run: npx observatory-cli app.wire.com --format=report
       - name: TLS Observatory app.wire.com
-        run: tlsobs app.wire.com
+        run: $(go env GOPATH)/bin/tlsobs app.wire.com
       - name: Observatory teams.wire.com
         # TODO: use --min-grade, --min-score, --rescan
         run: npx observatory-cli teams.wire.com --format=report
       - name: TLS Observatory teams.wire.com
-        run: tlsobs teams.wire.com
+        run: $(go env GOPATH)/bin/tlsobs teams.wire.com
       - name: Observatory account.wire.com
         # TODO: use --min-grade, --min-score, --rescan
         run: npx observatory-cli account.wire.com --format=report
       - name: TLS Observatory account.wire.com
-        run: tlsobs account.wire.com
+        run: $(go env GOPATH)/bin/tlsobs account.wire.com
       - name: Observatory wire.com
         # TODO: use --min-grade, --min-score, --rescan
         run: npx observatory-cli wire.com --format=report
       - name: TLS Observatory wire.com
-        run: tlsobs wire.com
+        run: $(go env GOPATH)/bin/tlsobs wire.com
