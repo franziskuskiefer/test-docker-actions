@@ -1,0 +1,14 @@
+name: build it
+
+on:
+  workflow_call:
+    inputs:
+      platform:
+        required: true
+        type: string
+
+jobs:
+  setup:
+    runs-on: ${{ inputs.platform }}
+    - name: ☁️ Checkout repository
+      uses: actions/checkout@v2
