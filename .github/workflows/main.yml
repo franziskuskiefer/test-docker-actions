@@ -1,0 +1,10 @@
+name: main
+
+jobs:
+  call-setup:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-18.04]
+    uses: franziskuskiefer/test-docker-actions/.github/workflows/build-test.yml@testing-reusable
