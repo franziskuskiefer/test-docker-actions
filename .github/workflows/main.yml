@@ -1,7 +1,10 @@
 name: main
 
 on:
-  push:
+  workflow_run:
+    workflows: [build]
+    types:
+      - completed
 
 jobs:
   setup:
