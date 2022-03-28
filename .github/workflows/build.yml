@@ -1,0 +1,20 @@
+name: build
+
+on:
+  push:
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ☁️ Checkout repository
+        uses: actions/checkout@v2
+      - name: Dummy
+        run: |
+          mkdir build
+          echo "build done" > ./build/info.txt
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build/
