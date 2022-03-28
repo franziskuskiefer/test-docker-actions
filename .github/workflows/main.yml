@@ -8,14 +8,7 @@ on:
 
 jobs:
   setup:
-    runs-on: ${{ matrix.cfg.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        cfg:
-          - { os: macos-latest, target: ["native", "aarch64-apple-ios", "aarch64-apple-darwin"], compiler: [{ cpp: g++-11, c: gcc-11 }, { cpp: clang++, c: clang }] }
-          - { os: windows-latest }
-          - { os: ubuntu-latest }
+    runs-on: ubuntu-latest
     steps:
       - name: 'Download artifact'
         uses: actions/github-script@v5
